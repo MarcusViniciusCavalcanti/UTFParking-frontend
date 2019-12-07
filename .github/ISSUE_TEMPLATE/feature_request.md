@@ -1,5 +1,6 @@
 ---
 name: Feature request
+about: Projeto de TCC - Controle de acesso a estacionamento por reconhecimento de placas de carros
 title: ''
 labels: enhancement
 assignees: MarcusViniciusCavalcanti
