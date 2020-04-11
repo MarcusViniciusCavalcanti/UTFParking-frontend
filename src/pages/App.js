@@ -1,14 +1,15 @@
 import React from 'react'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
-import { useApp } from 'stores/AppProvider'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import PageLoading from 'components/PageLoading'
+import { useAuth } from 'stores/AuthProvider'
 import SignIn from './SignIn'
+import Home from './Home'
 
 import 'antd/dist/antd.less'
 import 'assets/custom-antd-theme.less'
 
 function App () {
-  const { authenticated } = useApp()
+  const { authenticated } = useAuth()
 
   if (authenticated === null) {
     return <PageLoading />
@@ -24,14 +25,11 @@ function App () {
   }
 
   return (
-    <h1>Hello, World!</h1>
+    <Switch>
+      <Route path='/' exact component={Home} />
+      <Route path='/signin' render={() => <Redirect to='/' />} />
+    </Switch>
   )
 }
 
-const AppWithRouter = () => (
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-)
-
-export default AppWithRouter
+export default App

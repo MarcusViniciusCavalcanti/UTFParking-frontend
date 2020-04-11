@@ -3,11 +3,18 @@ import ReactDOM from 'react-dom'
 import App from 'pages/App'
 import * as serviceWorker from './serviceWorker'
 import AppProvider from 'stores/AppProvider'
+import { BrowserRouter } from 'react-router-dom'
+
+const RoutedApp = () => (
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+)
 
 ReactDOM.render(
   <React.StrictMode>
     <AppProvider>
-      <App />
+      <RoutedApp />
     </AppProvider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -1,22 +1,19 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
+import { withAuthProvider } from './AuthProvider'
 
 const initialState = {
-  authenticated: null
+  ok: true
 }
 
 const AppContext = React.createContext(initialState)
 
 function AppProvider (props) {
-  const [authenticated, setAuthenticated] = useState(initialState.authenticated)
+  const [ok] = useState(true)
 
-  useEffect(() => {
-    setAuthenticated(false)
-  }, [])
-
-  const value = useMemo(() => ({ authenticated }), [authenticated])
+  const value = useMemo(() => ({ ok }), [ok])
   return <AppContext.Provider value={value} {...props} />
 }
 
 export const useApp = () => React.useContext(AppContext)
 
-export default AppProvider
+export default withAuthProvider(AppProvider)
