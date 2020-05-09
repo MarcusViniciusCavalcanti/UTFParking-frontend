@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyledContent } from './styles'
 
-const Content = ({ children }) => (
-  <StyledContent>
+const Content = ({ children, ...props }) => (
+  <StyledContent {...props}>
     {children}
   </StyledContent>
 )
