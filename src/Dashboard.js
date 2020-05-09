@@ -5,6 +5,7 @@ import Sidebar from 'components/Sidebar'
 import Header from 'components/Header'
 import Footer from 'components/Footer'
 import Home from 'pages/Home'
+import Users from 'pages/Users'
 
 function Dashboard () {
   return (
@@ -15,7 +16,8 @@ function Dashboard () {
         <Header />
 
         <Switch>
-          <Route path='/' component={Home} />
+          <Route path='/' exact component={Home} />
+          <Route path='/users' component={Users} />
         </Switch>
 
         <Footer />

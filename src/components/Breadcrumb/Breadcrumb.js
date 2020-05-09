@@ -6,7 +6,7 @@ const Breadcrumb = ({ crumbs }) => (
     <AntBreadcrumb.Item>Início</AntBreadcrumb.Item>
     {crumbs && crumbs.map(
       ({ label, to }) => (
-        <AntBreadcrumb.Item key={to}>{label}</AntBreadcrumb.Item>
+        <AntBreadcrumb.Item key={label}>{label}</AntBreadcrumb.Item>
       )
     )}
   </AntBreadcrumb>
