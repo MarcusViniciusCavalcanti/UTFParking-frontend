@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import Cookies from 'js-cookie'
+import * as AuthAPI from 'api/auth'
+import * as UsersAPI from 'api/users'
 
 const TOKEN_STORE_KEY = 'utfpr_token'
 
@@ -17,9 +19,13 @@ function AuthProvider (props) {
   const [user, setUser] = useState(initialState.user)
 
   const signIn = async ({ username, password }) => {
-    console.log(username, password)
-    Cookies.set(TOKEN_STORE_KEY, 'TOKEN')
-    setToken('TOKEN')
+    try {
+      const { value } = await AuthAPI.login({ username, password })
+      setToken(value.replace(/bearer /gi, ''))
+    } catch (error) {
+      console.error(error)
+      return Promise.reject(error)
+    }
   }
 
   useEffect(() => {
@@ -33,8 +39,14 @@ function AuthProvider (props) {
 
   useEffect(() => {
     if (token) {
-      setTimeout(() => setUser({ username: 'Demonstration User' }), 1)
-      setAuthenticated(true)
+      Cookies.set(TOKEN_STORE_KEY, token);
+
+      (async () => {
+        // TODO: catch errors
+        const user = await UsersAPI.me()
+        setUser(user)
+        setAuthenticated(true)
+      })()
     }
   }, [token])
 

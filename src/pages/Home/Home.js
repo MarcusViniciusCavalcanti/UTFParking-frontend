@@ -1,8 +1,11 @@
 import React from 'react'
+import Page from 'components/Page'
 
 function Home () {
   return (
-    <h1>Hello, World!</h1>
+    <Page title='Visão geral'>
+      <h1>Hello, World!</h1>
+    </Page>
   )
 }
 

@@ -5,8 +5,15 @@ import { useAuth } from 'stores/AuthProvider'
 function SignIn () {
   const { signIn } = useAuth()
 
-  const handleSubmit = () => {
-    signIn({ username: 'admin', password: 'admin' })
+  const handleSubmit = async () => {
+    try {
+      await signIn({ username: 'beltrano_admin', password: '1234567' })
+    } catch (error) {
+      if (error.title === 'Unauthorized') {
+        // TODO: handle
+        window.alert(JSON.stringify(error, null, 2))
+      }
+    }
   }
 
   return (

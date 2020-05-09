@@ -2,8 +2,8 @@ import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import PageLoading from 'components/PageLoading'
 import { useAuth } from 'stores/AuthProvider'
+import Dashboard from 'Dashboard'
 import SignIn from './SignIn'
-import Home from './Home'
 
 import 'antd/dist/antd.less'
 import 'assets/custom-antd-theme.less'
@@ -26,8 +26,8 @@ function App () {
 
   return (
     <Switch>
-      <Route path='/' exact component={Home} />
-      <Route path='/signin' render={() => <Redirect to='/' />} />
+      <Route path='/signin' exact render={() => <Redirect to='/' />} />
+      <Route path='/' component={Dashboard} />
     </Switch>
   )
 }
