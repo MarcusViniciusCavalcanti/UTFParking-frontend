@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from 'pages/App'
-import * as serviceWorker from './serviceWorker'
-import AppProvider from 'stores/AppProvider'
 import { BrowserRouter } from 'react-router-dom'
+import App from 'pages/App'
+import AppProvider from 'stores/AppProvider'
+import * as serviceWorker from './serviceWorker'
+import 'assets/custom-antd-theme.less'
 
 const RoutedApp = () => (
   <BrowserRouter>
