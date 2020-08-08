@@ -3,7 +3,7 @@ import { Card } from 'antd'
 
 export const StyledContent = styled(Card)`
   ${({ noPadding }) => noPadding && css`
-    .ant-card-body {
+    & > .ant-card-body {
       padding: 0;
     }
   `}

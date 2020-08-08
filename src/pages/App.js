@@ -5,9 +5,6 @@ import { useAuth } from 'stores/AuthProvider'
 import Dashboard from 'Dashboard'
 import SignIn from './SignIn'
 
-import 'antd/dist/antd.less'
-import 'assets/custom-antd-theme.less'
-
 function App () {
   const { authenticated } = useAuth()
 
