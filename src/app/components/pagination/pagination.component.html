@@ -1,0 +1,16 @@
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item" [class.disabled]="asyncPage.first">
+      <a class="page-link" (click)="prevision()">Anterior</a>
+    </li>
+
+    <ng-container *ngFor="let num of pageNumbers">
+      <li class="page-item"
+          [class.active]="asyncPage.number === num - 1"
+          [class.disabled]="asyncPage.last">
+        <a class="page-link" (click)="change(num)">{{ num }}</a></li>
+    </ng-container>
+
+    <li class="page-item"[class.disabled]="asyncPage.last"><a class="page-link" (click)="next()">Próximo</a></li>
+  </ul>
+</nav>

@@ -1,0 +1,91 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Filtro</strong>
+          <small> use para criar um critério para consulta</small>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <form [formGroup]="filterForm">
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <label for="name">Usuário</label>
+                    <input formControlName="name" type="text" class="form-control"
+                           placeholder="Ex: Fulano, fulanoUsername" id="name">
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label for="select_roles">Perfil</label>
+                    <select class="form-control" formControlName="roles" id="select_roles">
+                      <option [ngValue]="''" disabled>Selecione Perfil</option>
+                      <option *ngFor="let role of roles"
+                              [ngValue]="role"> {{ role.description }}</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label for="select_types">Tipos</label>
+                    <select class="form-control" formControlName="types" id="select_types">
+                      <option [ngValue]="''" disabled>Selecione Tipos de Usuários</option>
+                      <option *ngFor="let type of types"
+                              [ngValue]="type"> {{ type.translateName }}</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label for="select_active">Ativo</label>
+                    <select class="form-control" formControlName="active" id="select_active">
+                      <option [ngValue]="''" disabled>Ativo?</option>
+                      <option *ngFor="let selectActive of selectActives"
+                              [ngValue]="selectActive"> {{ selectActive.name }}</option>
+                    </select>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="col-md-2 col-sm-12 text-right">
+            <button type="button" class="btn btn-block btn-outline-info" (click)="filter()">Filtrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> Lista de Usuários Cadastrados
+        </div>
+        <div class="card-body">
+          <table mdbTable class="table table-striped table-responsive-sm">
+            <thead>
+            <tr>
+              <th *ngFor="let display of displayes" scope="col">{{ display }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr mdbTableCol *ngFor="let user of page.content">
+              <th scope="row">{{ user?.userId }}</th>
+              <th scope="row">{{ user?.name }}</th>
+              <th scope="row">{{ transalater(user) }}</th>
+              <th scope="row">
+                <app-badge-profile-user [roles]="user.roles"></app-badge-profile-user>
+              </th>
+              <th scope="row">{{ user?.enabled ? 'Sim' : 'Não' }}</th>
+              <th scope="row"><i class="fa fa-car"></i></th>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <app-pagination [page]="page" (changePage)="getNewPage($event)"></app-pagination>
+    </div>
+  </div>
+</div>

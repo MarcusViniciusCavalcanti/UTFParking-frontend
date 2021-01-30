@@ -3,7 +3,7 @@ import { User } from '../../core/data/user';
 import { AuthService } from '../../core/service/auth/auth.service';
 import { AvatarService } from '../../core/service/avatar/avatar.service';
 import { UserService } from '../../core/service/user/user.service';
-import { navItems, NavItemsService } from '../../_nav';
+import { NavItemsService } from '../../_nav';
 
 @Component({
   selector: 'app-dashboard',

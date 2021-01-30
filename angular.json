@@ -34,7 +34,9 @@
             "scripts": [],
             "allowedCommonJsDependencies": [
               "chart.js",
-              "classnames"
+              "classnames",
+              "stompjs",
+              "sockjs-client"
             ]
           },
           "configurations": {

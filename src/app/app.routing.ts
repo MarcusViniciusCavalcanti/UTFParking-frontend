@@ -11,7 +11,7 @@ import { LoginComponent } from './views/login/login.component';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
@@ -43,9 +43,13 @@ export const routes: Routes = [
     },
     children: [
       {
-        path: 'dashboard',
-        loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
+        path: 'home',
+        loadChildren: () => import('./views/home/home.module').then(m => m.HomeModule)
       },
+      {
+        path: 'usuarios',
+        loadChildren: () => import('./views/users/users.module').then(m => m.UsersModule)
+      }
     ]
   },
   { path: '**', component: P404Component }

@@ -1,0 +1,19 @@
+<ng-container *ngFor="let role of roles">
+  <ng-container *ngIf="role.name === 'ROLE_DRIVER'">
+    <span class="badge badge-success">
+        {{ role.description }}
+    </span>
+  </ng-container>
+
+  <ng-container *ngIf="role.name === 'ROLE_ADMIN'">
+    <span class="badge badge-info">
+        {{ role.description }}
+    </span>
+  </ng-container>
+
+  <ng-container *ngIf="role.name === 'ROLE_OPERATOR'">
+    <span class="badge badge-warning">
+        {{ role.description }}
+    </span>
+  </ng-container>
+</ng-container>

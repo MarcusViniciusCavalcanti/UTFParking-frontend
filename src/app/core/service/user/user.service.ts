@@ -4,8 +4,8 @@ import { User } from '../../data/user';
 import { environment } from '../../../../environments/environment';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
-import {TypeUser} from "../../data/type-user";
-import { PageUser } from "../../data/page-user";
+import { TypeUser } from '../../data/type-user';
+import { Page } from '../../data/page';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class UserService {
   private currentUser: Observable<User>;
   private loadingSubject = new BehaviorSubject<boolean>(false);
   
-  private pageSubject = new BehaviorSubject<PageUser>(new PageUser());
+  private pageSubject = new BehaviorSubject<Page<User>>(new Page<User>());
   public loadingPage$ = this.loadingSubject.asObservable();
 
   constructor(private http: HttpClient) {
@@ -27,7 +27,7 @@ export class UserService {
     return this.currentUserSubject.value;
   }
   
-  getPage(): Observable<PageUser> {
+  getPage(): Observable<Page<User>> {
     return this.pageSubject.asObservable();
   }
 
@@ -41,7 +41,7 @@ export class UserService {
   }
 
   getTypes() {
-    return this.http.get<TypeUser[]>(environment.serverUrl('/users/types'))
+    return this.http.get<TypeUser[]>(environment.serverUrl('/users/types'));
   }
   
   getAllUser(page, size, sort, direction, name, profile, type, enabled): void {
@@ -55,12 +55,12 @@ export class UserService {
       .append('profile', profile)
       .append('type', type)
       .append('enabled', enabled);
-    this.http.get<PageUser>(environment.serverUrl('/users'), { params })
+    this.http.get<Page<User>>(environment.serverUrl('/users'), { params })
       .pipe(
-        catchError(() => of(new PageUser())),
+        catchError(() => of(new Page<User>())),
         finalize(() => this.loadingSubject.next(true))
       ).subscribe(page => {
-        this.pageSubject.next(page)
-      })
+        this.pageSubject.next(page);
+      });
   }
 }

@@ -28,6 +28,7 @@ import { ContainerModule } from './containers/container.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { UnauthorizedInterceptor } from './core/interceptors/unauthorized.interceptor';
+import { HomeModule } from './views/home/home.module';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { UnauthorizedInterceptor } from './core/interceptors/unauthorized.interc
     IconSetModule.forRoot(),
     ContainerModule,
     HttpClientModule,
+    HomeModule
   ],
   declarations: [
     AppComponent,
