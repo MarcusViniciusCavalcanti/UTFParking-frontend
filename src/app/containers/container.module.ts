@@ -6,11 +6,15 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { RouterModule } from '@angular/router';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ModeSystemComponent } from './mode-system/mode-system.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { NavBarItemComponent } from './nav-bar-item/nav-bar-item.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
-  declarations: [ DefaultLayoutComponent ],
+  declarations: [ DefaultLayoutComponent, ModeSystemComponent, SideBarComponent, NavBarItemComponent ],
   imports: [
     CommonModule,
     AppHeaderModule,
@@ -21,7 +25,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     RouterModule,
     AppAsideModule,
     TabsModule,
-    AppFooterModule
+    AppFooterModule,
+    ReactiveFormsModule
   ],
   exports: [ DefaultLayoutComponent ]
 })

@@ -25,7 +25,7 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ContainerModule } from './containers/container.module';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { UnauthorizedInterceptor } from './core/interceptors/unauthorized.interceptor';
 
@@ -38,7 +38,8 @@ import { UnauthorizedInterceptor } from './core/interceptors/unauthorized.interc
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     IconSetModule.forRoot(),
-    ContainerModule
+    ContainerModule,
+    HttpClientModule,
   ],
   declarations: [
     AppComponent,
