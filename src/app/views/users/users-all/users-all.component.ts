@@ -47,16 +47,19 @@ export class UsersAllComponent implements OnInit {
   }
 
   filter() {
-    const name = this.filterForm.controls.name.value || '';
-    const profile = this.filterForm.controls.roles.value.name || '';
-    const type = this.filterForm.controls.types.value.name || '';
-    const active = this.filterForm.controls.active.value.value === undefined ? true : this.filterForm.controls.active.value.value;
-
     this.getPage(0);
   }
   
   getNewPage(event) {
     this.getPage(event);
+  }
+  
+  cleanFilter() {
+    this.filterForm.controls.name.setValue('');
+    this.filterForm.controls.roles.setValue('') ;
+    this.filterForm.controls.types.setValue('');
+    this.filterForm.controls.active.setValue('');
+  
   }
   
   getPage(num: number) {
