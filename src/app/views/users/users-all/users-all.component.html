@@ -85,7 +85,7 @@
           </table>
         </div>
       </div>
-      <app-pagination [page]="page" (changePage)="getNewPage($event)"></app-pagination>
+      <app-pagination [page]="page" (changePage)="getNewPage($event)" (changeSize)="changeSize($event)"></app-pagination>
     </div>
   </div>
 </div>

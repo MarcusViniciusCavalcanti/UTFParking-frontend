@@ -7,10 +7,22 @@
     <ng-container *ngFor="let num of pageNumbers">
       <li class="page-item"
           [class.active]="asyncPage.number === num - 1"
-          [class.disabled]="asyncPage.last">
+          [class.disabled]="asyncPage.totalPages < num">
         <a class="page-link" (click)="change(num)">{{ num }}</a></li>
     </ng-container>
 
     <li class="page-item"[class.disabled]="asyncPage.last"><a class="page-link" (click)="next()">Próximo</a></li>
+
+    <div class="col-4 form-inline align-items-center">
+      <label for="select_size" class="col-form-label">
+        elementos exibidos:
+      </label>
+      <select class="fform-control form-control-sm" id="select_size" (change)="chagenSize($event.target.value)">
+        <option value="5" selected>5</option>
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+      </select>
+    </div>
   </ul>
 </nav>

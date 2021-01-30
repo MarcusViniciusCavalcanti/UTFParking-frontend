@@ -10,9 +10,12 @@ export class PaginationComponent implements OnInit, OnChanges {
 
   @Input() page: Page<any>;
   @Output() changePage = new EventEmitter<number>();
+  @Output() changeSize = new EventEmitter<number>();
 
   asyncPage: Page<any> = new Page<any>();
   pageNumbers: number[] = [];
+  sizes: number[] = [5, 10, 25, 50];
+  selectedSize = 4;
 
   constructor() { }
 
@@ -31,8 +34,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   pageNumber(page: Page<any>): void {
     if (!this.pageNumbers.includes(page.number + 1)) {
       this.pageNumbers = [];
-      const total = page.totalPages;
-      for (let index = 1; index > total || index < 5; index++) {
+      for (let index = 1; index < 5; index++) {
         this.pageNumbers.push(
           page.number + index,
         );
@@ -54,5 +56,10 @@ export class PaginationComponent implements OnInit, OnChanges {
     if (!this.asyncPage.last) {
       this.changePage.emit(this.asyncPage.number + 1);
     }
+  }
+  
+  chagenSize(size: number) {
+    this.selectedSize = size;
+    this.changeSize.emit(size);
   }
 }

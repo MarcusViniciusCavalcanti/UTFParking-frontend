@@ -18,6 +18,8 @@ export class UsersAllComponent implements OnInit {
   selectActives = [{value: true, name: 'Sim'}, {value: false, name: 'Não'}];
   displayes = ['ID', 'Nome', 'Tipo', 'Perfils', 'Ativo?', 'Carros'];
   
+  sizeElements = 5;
+  
   constructor(private formBuilder: FormBuilder,
               private roleService: RoleService,
               private userService: UserService) {
@@ -37,7 +39,7 @@ export class UsersAllComponent implements OnInit {
       this.page = page;
     });
 
-    this.userService.getAllUser(0, 1, 'name', 'ASC', '', '', '', true);
+    this.userService.getAllUser(0, this.sizeElements, 'name', 'ASC', '', '', '', true);
   }
 
   transalater(user: User) {
@@ -65,7 +67,7 @@ export class UsersAllComponent implements OnInit {
   
     this.userService.getAllUser(
       num,
-      1,
+      this.sizeElements,
       'name',
       'ASC',
       name,
@@ -73,5 +75,10 @@ export class UsersAllComponent implements OnInit {
       type,
       active
     );
+  }
+  
+  changeSize(num: number) {
+    this.sizeElements = num;
+    this.getPage(0);
   }
 }
