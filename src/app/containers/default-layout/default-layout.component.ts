@@ -11,35 +11,40 @@ import { navItems, NavItemsService } from '../../_nav';
 })
 export class DefaultLayoutComponent implements OnInit {
   public sidebarMinimized = false;
-  
+
   public navItems;
-  
+
   user: User;
   avatarUser;
 
   constructor(private avatarService: AvatarService,
               private userService: UserService,
               private authService: AuthService) {
-  
+
     const navItemsService = new NavItemsService();
-  
+
     this.user = userService.currentUserValue;
     this.navItems = navItemsService.getItems(this.user.roles);
-    
+
   }
-  
+
   ngOnInit(): void {
-    this.avatarService.getAvatar(this.user).subscribe(image => this.createImageFromBlob(image));
+    this.avatarService.getAvatar(this.user)
+      .subscribe(image => this.createImageFromBlob(image));
   }
-  
+
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
-  
+
+  isAdmin() {
+    return User.isAdmin(this.user.roles);
+  }
+
   createImageFromBlob(image: Blob) {
     const reader = new FileReader();
     reader.addEventListener('load', () => this.avatarUser = reader.result, false);
-    
+
     if (image) {
       reader.readAsDataURL(image);
     }

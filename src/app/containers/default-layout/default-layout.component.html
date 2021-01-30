@@ -3,7 +3,8 @@
   [fixed]="true"
   [navbarBrandFull]="{src: 'assets/img/brand/logo.svg', width: 89, height: 25, alt: 'UTFPR Logo'}"
   [sidebarToggler]="'lg'"
-  [asideMenuToggler]="'lg'">
+  [asideMenuToggler]="isAdmin()"
+  [mobileAsideMenuToggler]="isAdmin()">
   <ul class="nav navbar-nav d-md-down-none">
     <app-mode-system></app-mode-system>
   </ul>
@@ -13,9 +14,18 @@
 </app-header>
 
 <div class="app-body">
-  <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
-    <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
+  <app-sidebar #appSidebar
+               [fixed]="true"
+               [display]="'lg'"
+               [minimized]="sidebarMinimized"
+               (minimizedChange)="toggleMinimize($event)">
+    <app-sidebar-nav [navItems]="navItems"
+                     [perfectScrollbar]
+                     [disabled]="appSidebar.minimized">
+    </app-sidebar-nav>
+
     <app-sidebar-minimizer></app-sidebar-minimizer>
+
   </app-sidebar>
 
   <main class="main">
@@ -32,7 +42,7 @@
     </div><!-- /.container-fluid -->
   </main>
 
-  <app-side-bar></app-side-bar>
+  <app-side-bar *ngIf="isAdmin()"></app-side-bar>
 
 </div>
 

@@ -8,6 +8,10 @@ export class User {
     roles: Role[];
     type: string;
     _links?: Links;
+
+    static isAdmin(roles: Role[]) {
+        return roles.some(role => role.name === 'ROLE_ADMIN');
+    }
 }
 
 export class Role {
