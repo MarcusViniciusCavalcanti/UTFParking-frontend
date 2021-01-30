@@ -25,6 +25,9 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ContainerModule } from './containers/container.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { UnauthorizedInterceptor } from './core/interceptors/unauthorized.interceptor';
 
 @NgModule({
   imports: [
@@ -43,10 +46,9 @@ import { ContainerModule } from './containers/container.module';
     P500Component,
   ],
   providers: [
-    {
-      provide: LocationStrategy,
-      useClass: HashLocationStrategy
-    },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptor, multi: true },
     IconSetService,
   ],
   bootstrap: [ AppComponent ]
