@@ -126,7 +126,7 @@
                       [attr.disabled]="isEnabled()">
                 <option [ngValue]="null" disabled>Selecione Perfil</option>
                 <option *ngFor="let role of roles"
-                        [ngValue]="role"> {{ role.description }}</option>
+                        [ngValue]="role.name"> {{ role.description }}</option>
               </select>
 
               <ng-container *ngIf="authorities.invalid">

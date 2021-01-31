@@ -1,3 +1,15 @@
 <div class="animated fadeIn">
-  <app-form-user [inputUser]="inputUser" [isUpdateUser]="false"></app-form-user>
+  <ng-container *ngIf="user">
+    <div class="alert alert-success" role="alert">
+      Usuário {{ user.name }} criado com sucesso <a class="alert-link" href="#"> clique aqui</a> para ver os detalhes.
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="isError">
+    <div class="alert alert-success" role="alert">
+      Error ao criar o usuário, por favor tente novamente mais tarde.
+    </div>
+  </ng-container>
+
+  <app-form-user [inputUser]="inputUser" [isUpdateUser]="false" (saveUser)="submit($event)"></app-form-user>
 </div>

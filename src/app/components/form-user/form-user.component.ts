@@ -20,6 +20,14 @@ export class InputFormUser {
   enabled: boolean = true;
   carPlate: string;
   carModel: string;
+
+  static getAuthoroties(authoroty) {
+    if (authoroty === 'ROLE_ADMIN') {
+      return [1, 2, 3];
+    } else {
+      return [1];
+    }
+  }
 }
 
 @Component({
@@ -47,8 +55,10 @@ export class FormUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
-      name:                   [this.inputUser.name, [Validators.required, Validators.minLength(5), Validators.maxLength(255)]],
-      username:               [this.inputUser.username, [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
+      name:                   [this.inputUser.name,
+        [Validators.required, Validators.minLength(5), Validators.maxLength(255)]],
+      username:               [this.inputUser.username,
+        [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
       password:               [this.inputUser.password],
       authorities:            [this.inputUser.authorities, [Validators.required]],
       type:                   [this.inputUser.type, [Validators.required]],
@@ -98,7 +108,22 @@ export class FormUserComponent implements OnInit {
 
   submit() {
     if (this.userForm.valid) {
-      console.log(this.userForm.getRawValue());
+      const dataForm = this.userForm.getRawValue();
+      const input = new InputUser();
+
+      input.name = dataForm.name;
+      input.username = dataForm.username;
+      input.password = dataForm.password;
+      input.authorities = InputFormUser.getAuthoroties(dataForm.authorities);
+      input.type = dataForm.type;
+      input.accountNonExpired = dataForm.accountNonExpired;
+      input.accountNonLocked = dataForm.accountNonLocked;
+      input.credentialsNonExpired = dataForm.credentialsNonExpired;
+      input.enabled = dataForm.enabled;
+      input.carPlate = dataForm.carPlate;
+      input.carModel = dataForm.carModel;
+
+      this.saveUser.emit(input);
     } else {
       Object.keys(this.userForm.controls).forEach(field => {
         const control = this.userForm.get(field);
@@ -106,9 +131,8 @@ export class FormUserComponent implements OnInit {
       });
     }
   }
-  
+
   isInvalid(field) {
     return this.userForm.get(field).valid && this.userForm.get(field).touched;
-
   }
 }

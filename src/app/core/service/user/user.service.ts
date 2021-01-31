@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
 import { TypeUser } from '../../data/type-user';
 import { Page } from '../../data/page';
+import { InputUser } from '../../data/input-user';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,10 @@ export class UserService {
 
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
+  }
+  
+  create(input: InputUser): Observable<User> {
+    return this.http.post<User>(environment.serverUrl('/users'), input);
   }
   
   getPage(): Observable<Page<User>> {
