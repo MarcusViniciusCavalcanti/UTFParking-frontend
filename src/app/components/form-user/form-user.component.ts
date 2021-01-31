@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Role } from '../../core/data/user';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InputUser } from '../../core/data/input-user';
 import { ModeSystem } from '../../core/data/mode-system.enum';
 import { RoleService } from '../../core/service/security/role.service';
@@ -33,8 +33,6 @@ export class FormUserComponent implements OnInit {
   @Output() saveUser = new EventEmitter<InputUser>();
 
   userForm: FormGroup;
-  ModeSystem: ModeSystem;
-  modeSystem: string;
 
   roles: Role[];
   rolesApi: Role[];
@@ -49,11 +47,11 @@ export class FormUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
-      name:                   [this.inputUser.name],
-      username:               [this.inputUser.username],
+      name:                   [this.inputUser.name, [Validators.required, Validators.minLength(5), Validators.maxLength(255)]],
+      username:               [this.inputUser.username, [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
       password:               [this.inputUser.password],
-      authorities:            [this.inputUser.authorities],
-      type:                   [this.inputUser.type],
+      authorities:            [this.inputUser.authorities, [Validators.required]],
+      type:                   [this.inputUser.type, [Validators.required]],
       accountNonExpired:      [this.inputUser.accountNonExpired],
       accountNonLocked:       [this.inputUser.accountNonLocked],
       credentialsNonExpired:  [this.inputUser.credentialsNonExpired],
@@ -63,17 +61,26 @@ export class FormUserComponent implements OnInit {
     });
   }
 
-  save(user: InputUser) {
-    if (this.userForm.invalid) {
-
-
-
-      this.saveUser.emit(user);
-    }
+  get name() {
+    return this.userForm.controls.name;
   }
 
-  mode(mode: ModeSystem) {
-    return this.modeSystem === mode;
+  get username() {
+    return this.userForm.controls.username;
+  }
+
+  get authorities() {
+    return this.userForm.controls.authorities;
+  }
+
+  get type() {
+    return this.userForm.controls.type;
+  }
+
+  save(user: InputUser) {
+    if (this.userForm.invalid) {
+      this.saveUser.emit(user);
+    }
   }
 
   changeTypeUser(event) {
@@ -87,5 +94,21 @@ export class FormUserComponent implements OnInit {
 
   isEnabled() {
     return this.roles ? null : '';
+  }
+
+  submit() {
+    if (this.userForm.valid) {
+      console.log(this.userForm.getRawValue());
+    } else {
+      Object.keys(this.userForm.controls).forEach(field => {
+        const control = this.userForm.get(field);
+        control.markAsTouched();
+      });
+    }
+  }
+  
+  isInvalid(field) {
+    return this.userForm.get(field).valid && this.userForm.get(field).touched;
+
   }
 }

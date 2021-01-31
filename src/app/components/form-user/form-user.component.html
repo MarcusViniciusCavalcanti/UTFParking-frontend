@@ -1,4 +1,5 @@
 <form [formGroup]="userForm">
+
   <!--  dados pessoais  -->
   <div class="row">
     <div class="col-12">
@@ -11,14 +12,50 @@
           <div class="row">
             <div class="form-group col-md-4">
               <label for="name">Usuário</label>
-              <input formControlName="name" type="text" class="form-control"
+              <input [class.is-invalid]="name.invalid && name.touched"
+                     [class.is-valid]="name.valid && name.touched"
+                     formControlName="name" type="text" class="form-control"
                      placeholder="Ex: Fulano" id="name">
+
+              <ng-container *ngIf="name.invalid">
+                <div class="invalid-feedback">
+                  <span *ngIf="name.errors.required">
+                    Campo obrigatório, por favor preencha
+                  </span>
+
+                  <span *ngIf="name.errors.minlength">
+                    O nome deve ser maior que {{ name.errors.minlength.requiredLength }}
+                  </span>
+
+                  <span *ngIf="name.errors.maxlength">
+                    O nome deve ser menor que {{ name.errors.maxlength.requiredLength }}
+                  </span>
+                </div>
+              </ng-container>
             </div>
 
             <div class="form-group col-md-4">
               <label for="username">Login de acesso</label>
-              <input formControlName="username" type="text" class="form-control"
+              <input [class.is-invalid]="username.invalid && username.touched"
+                     [class.is-valid]="username.valid && username.touched"
+                     formControlName="username" type="text" class="form-control"
                      placeholder="Ex: fulano@fulano.com" id="username">
+
+              <ng-container *ngIf="username.invalid">
+                <div class="invalid-feedback">
+                  <span *ngIf="username.errors.required">
+                    Campo obrigatório, por favor preencha
+                  </span>
+
+                  <span *ngIf="username.errors.minlength">
+                    O nome deve ser maior que {{ username.errors.minlength.requiredLength }}
+                  </span>
+
+                  <span *ngIf="username.errors.maxlength">
+                    O nome deve ser menor que {{ username.errors.maxlength.requiredLength }}
+                  </span>
+                </div>
+              </ng-container>
             </div>
 
             <div class="form-group col-md-4">
@@ -30,10 +67,10 @@
         </div>
       </div>
     </div>
-
   </div>
 
   <div class="row">
+    <!--  carro  -->
     <div class="col-md-6 col-sm-12">
       <div class="card card-accent-info">
         <div class="card-header">
@@ -54,6 +91,7 @@
       </div>
     </div>
 
+    <!--  tipo da conta  -->
     <div class="col-md-6 col-sm-12">
       <div class="card card-accent-info">
         <div class="card-header">
@@ -63,20 +101,41 @@
           <div class="row">
             <div class="form-group col-md-6">
               <label for="select_types">Tipos</label>
-              <select class="form-control" formControlName="type" (change)="changeTypeUser($event)" id="select_types">
+              <select [class.is-invalid]="type.invalid && type.touched"
+                      [class.is-valid]="type.valid && type.touched"
+                      class="form-control" formControlName="type"
+                      (change)="changeTypeUser($event)" id="select_types">
                 <option [ngValue]="''" disabled>Selecione Tipos de Usuários</option>
                 <option *ngFor="let type of types"
                         [ngValue]="type.name"> {{ type.translateName }}</option>
               </select>
+
+              <ng-container *ngIf="type.invalid">
+                <div class="invalid-feedback">
+                  <span *ngIf="type.errors.required">
+                    Campo obrigatório, selecione um tipo de usuário
+                  </span>
+                </div>
+              </ng-container>
             </div>
             <div class="form-group col-md-6">
               <label for="select_roles">Perfil</label>
-              <select class="form-control" formControlName="authorities" id="select_roles"
+              <select [class.is-invalid]="authorities.invalid && authorities.touched"
+                      [class.is-valid]="authorities.valid && authorities.touched"
+                      class="form-control" formControlName="authorities" id="select_roles"
                       [attr.disabled]="isEnabled()">
                 <option [ngValue]="null" disabled>Selecione Perfil</option>
                 <option *ngFor="let role of roles"
                         [ngValue]="role"> {{ role.description }}</option>
               </select>
+
+              <ng-container *ngIf="authorities.invalid">
+                <div class="invalid-feedback">
+                  <span *ngIf="authorities.errors.required">
+                    Campo obrigatório, selecione um perfil
+                  </span>
+                </div>
+              </ng-container>
             </div>
           </div>
         </div>
@@ -84,11 +143,11 @@
     </div>
   </div>
 
-  <!--  conta  -->
+  <!--  configurações da conta  -->
   <ng-container *ngIf="isUpdateUser">
     <div class="card card-accent-info">
       <div class="card-header">
-        Conta
+        Configurações da conta
       </div>
 
       <div class="card-body">
@@ -140,5 +199,11 @@
       </div>
     </div>
   </ng-container>
+
+  <div class="row">
+    <div class="col-md-3 col-sm-12">
+      <button type="submit" class="btn btn-block btn-outline-success" (click)="submit()">Salvar</button>
+    </div>
+  </div>
 
 </form>
