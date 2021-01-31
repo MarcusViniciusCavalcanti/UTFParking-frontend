@@ -1,0 +1,144 @@
+<form [formGroup]="userForm">
+  <!--  dados pessoais  -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-accent-info">
+
+        <div class="card-header">
+          Dados Pessoais
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label for="name">Usuário</label>
+              <input formControlName="name" type="text" class="form-control"
+                     placeholder="Ex: Fulano" id="name">
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="username">Login de acesso</label>
+              <input formControlName="username" type="text" class="form-control"
+                     placeholder="Ex: fulano@fulano.com" id="username">
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="password">Password</label>
+              <input formControlName="password" type="text" class="form-control" id="password">
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-sm-12">
+      <div class="card card-accent-info">
+        <div class="card-header">
+          Acesso
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="carModel">Modelo do Carro</label>
+              <input formControlName="carModel" placeholder="Ex: Uno, Astra" type="text" class="form-control" id="carModel">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="carPlate">Placa do Carro</label>
+              <input formControlName="carPlate" placeholder="Ex: Uno" type="text" class="form-control" id="carPlate">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+      <div class="card card-accent-info">
+        <div class="card-header">
+          Tipo da conta
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="select_types">Tipos</label>
+              <select class="form-control" formControlName="type" (change)="changeTypeUser($event)" id="select_types">
+                <option [ngValue]="''" disabled>Selecione Tipos de Usuários</option>
+                <option *ngFor="let type of types"
+                        [ngValue]="type.name"> {{ type.translateName }}</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="select_roles">Perfil</label>
+              <select class="form-control" formControlName="authorities" id="select_roles"
+                      [attr.disabled]="isEnabled()">
+                <option [ngValue]="null" disabled>Selecione Perfil</option>
+                <option *ngFor="let role of roles"
+                        [ngValue]="role"> {{ role.description }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  conta  -->
+  <ng-container *ngIf="isUpdateUser">
+    <div class="card card-accent-info">
+      <div class="card-header">
+        Conta
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-2 col-sm-12">
+            <small><b>Ativa?</b></small>
+            <label class="switch switch-label switch-pill switch-success switch-sm float-right">
+              <input type="radio" class="switch-input">
+              <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+            </label>
+            <div>
+              <small class="text-muted">Use para ativar ou desativar a conta.</small>
+            </div>
+          </div>
+
+          <div class="col-md-2 col-sm-12">
+            <small><b>Expirada?</b></small>
+            <label class="switch switch-label switch-pill switch-success switch-sm float-right">
+              <input type="radio" class="switch-input">
+              <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+            </label>
+            <div>
+              <small class="text-muted">Use para ativar ou desativar a conta.</small>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-sm-12">
+            <small><b>Credenciais expiradas?</b></small>
+            <label class="switch switch-label switch-pill switch-success switch-sm float-right">
+              <input type="radio" class="switch-input">
+              <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+            </label>
+            <div>
+              <small class="text-muted">Use para expirar as credenciais da conta, força a renovação da senha.</small>
+            </div>
+          </div>
+
+          <div class="col-md-2 col-sm-12">
+            <small><b>Bloqueada?</b></small>
+            <label class="switch switch-label switch-pill switch-success switch-sm float-right">
+              <input type="radio" class="switch-input">
+              <span class="switch-slider" data-checked="Sim" data-unchecked="Não"></span>
+            </label>
+            <div>
+              <small class="text-muted">Use para ebloque.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+</form>

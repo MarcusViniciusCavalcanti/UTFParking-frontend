@@ -17,9 +17,9 @@ export class UsersAllComponent implements OnInit {
   types: TypeUser[];
   selectActives = [{value: true, name: 'Sim'}, {value: false, name: 'Não'}];
   displayes = ['ID', 'Nome', 'Tipo', 'Perfils', 'Ativo?', 'Carros'];
-  
+
   sizeElements = 5;
-  
+
   constructor(private formBuilder: FormBuilder,
               private roleService: RoleService,
               private userService: UserService) {
@@ -49,25 +49,25 @@ export class UsersAllComponent implements OnInit {
   filter() {
     this.getPage(0);
   }
-  
+
   getNewPage(event) {
     this.getPage(event);
   }
-  
+
   cleanFilter() {
     this.filterForm.controls.name.setValue('');
     this.filterForm.controls.roles.setValue('') ;
     this.filterForm.controls.types.setValue('');
     this.filterForm.controls.active.setValue('');
-  
+
   }
-  
+
   getPage(num: number) {
     const name = this.filterForm.controls.name.value || '';
     const profile = this.filterForm.controls.roles.value.name || '';
     const type = this.filterForm.controls.types.value.name || '';
     const active = this.filterForm.controls.active.value.value === undefined ? true : this.filterForm.controls.active.value.value;
-  
+
     this.userService.getAllUser(
       num,
       this.sizeElements,
@@ -79,7 +79,7 @@ export class UsersAllComponent implements OnInit {
       active
     );
   }
-  
+
   changeSize(num: number) {
     this.sizeElements = num;
     this.getPage(0);

@@ -56,17 +56,15 @@ const navItemsAdmin: INavData[] = [
   {
     name: 'Usuários',
     url: '/usuarios',
-    icon: 'icon-drop',
+    icon: 'cil-group',
     children: [
       {
-        name: 'Todos',
+        name: 'Listar Todos',
         url: '/usuarios/todos',
-        icon: 'icon-puzzle'
       },
       {
-        name: 'Cadastro',
+        name: 'Adicionar',
         url: '/usuarios/novo',
-        icon: 'icon-puzzle'
       },
     ]
   },

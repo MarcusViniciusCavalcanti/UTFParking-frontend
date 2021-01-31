@@ -3,8 +3,8 @@
   [fixed]="true"
   [navbarBrandFull]="{src: 'assets/img/brand/logo.svg', width: 89, height: 25, alt: 'UTFPR Logo'}"
   [sidebarToggler]="'lg'"
-  [asideMenuToggler]="isAdmin()"
-  [mobileAsideMenuToggler]="isAdmin()">
+  [asideMenuToggler]="isAdmin() ? 'lg': false"
+  [mobileAsideMenuToggler]="isAdmin() ? 'lg': false">
   <ul class="nav navbar-nav d-md-down-none">
     <app-mode-system></app-mode-system>
   </ul>

@@ -14,8 +14,8 @@ export class ModeSystemComponent implements OnInit {
   public modeSystem: string;
   ModeSystem = ModeSystem;
 
-  constructor( private authService: AuthService,
-               private configurationService: ConfigurationService) {
+  constructor(private authService: AuthService,
+              private configurationService: ConfigurationService) {
     const topicConfiguration = new TopicConfiguration(authService, configurationService);
 
     topicConfiguration.connect();

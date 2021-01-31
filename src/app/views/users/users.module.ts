@@ -4,11 +4,12 @@ import { UsersAllComponent } from './users-all/users-all.component';
 import { UsersRoutingModule } from './users-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from '../../components/components.module';
+import { UserCreateComponent } from './create/user-create.component';
 
 
 
 @NgModule({
-  declarations: [UsersAllComponent],
+  declarations: [UsersAllComponent, UserCreateComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
