@@ -7,6 +7,7 @@ import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
+import { UsersAllComponent } from './views/users/users-all/users-all.component';
 
 export const routes: Routes = [
   {
@@ -51,6 +52,13 @@ export const routes: Routes = [
         loadChildren: () => import('./views/users/users.module').then(m => m.UsersModule)
       }
     ]
+  },
+  {
+    path: '',
+    component: UsersAllComponent,
+    data: {
+      title: 'Lista de todo'
+    },
   },
   { path: '**', component: P404Component }
 ];

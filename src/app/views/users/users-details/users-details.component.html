@@ -1,0 +1,93 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <!--  Conta  -->
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <span>Informações do usuário: <strong>{{ user?.name }}</strong></span>
+        </div>
+
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-5 col-md-5">
+              <img [src]="avatarUser" class="img-fluid" alt="Foto do avatar do usuário">
+            </div>
+
+            <div class="col-sm-5 col-md-5">
+              <h5 class="profile-heading">
+                Tipo do usuário -  <small>{{ tranlaterType(user) }}</small>
+              </h5>
+              <h5 class="profile-heading">
+                Perfil - <small><app-badge-profile-user [roles]="user?.roles"></app-badge-profile-user></small>
+              </h5>
+
+              <h5>
+                Conta ativa -
+                <small *ngIf="user?.enabled">
+                  <span class="badge badge-success">
+                    Sim
+                  </span>
+                </small>
+                <small *ngIf="!user?.enabled">
+                  <span class="badge badge-danger">
+                    Não
+                  </span>
+                </small>
+              </h5>
+
+              <h5>
+                Conta expiradas -
+                <small *ngIf="user?.accountNonExpired">
+                  <span class="badge badge-success">
+                    Sim
+                  </span>
+                </small>
+                <small *ngIf="!user?.accountNonExpired">
+                  <span class="badge badge-danger">
+                    Não
+                  </span>
+                </small>
+              </h5>
+
+              <h5>
+                Conta bloqueada -
+                <small *ngIf="user?.accountNonLocked">
+                  <span class="badge badge-success">
+                    Sim
+                  </span>
+                </small>
+                <small *ngIf="!user?.accountNonLocked">
+                  <span class="badge badge-danger">
+                    Não
+                  </span>
+                </small>
+              </h5>
+
+              <h5>
+                Credenciais expiradas -
+                <small *ngIf="user?.credentialsNonExpired">
+                  <span class="badge badge-success">
+                    Sim
+                  </span>
+                </small>
+                <small *ngIf="!user?.credentialsNonExpired">
+                  <span class="badge badge-danger">
+                    Não
+                  </span>
+                </small>
+              </h5>
+
+              <h5 class="profile-heading">
+                Modelo do carro - <small>{{user?.car.model}}</small>
+              </h5>
+
+              <h5 class="profile-heading">
+                Placa do carro - <small>{{user?.car.plate}}</small>
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

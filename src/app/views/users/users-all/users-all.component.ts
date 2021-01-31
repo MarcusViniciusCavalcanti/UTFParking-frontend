@@ -9,6 +9,7 @@ import { Page } from '../../../core/data/page';
 @Component({
   selector: 'app-users-all',
   templateUrl: './users-all.component.html',
+  styles: ['.btn { cursor: pointer }']
 })
 export class UsersAllComponent implements OnInit {
   filterForm: FormGroup;
@@ -16,7 +17,7 @@ export class UsersAllComponent implements OnInit {
   roles: Role[];
   types: TypeUser[];
   selectActives = [{value: true, name: 'Sim'}, {value: false, name: 'Não'}];
-  displayes = ['ID', 'Nome', 'Tipo', 'Perfils', 'Ativo?', 'Carros'];
+  displayes = ['ID', 'Nome', 'Tipo', 'Perfils', 'Ativo?', 'Carros', 'Ações'];
 
   sizeElements = 5;
 

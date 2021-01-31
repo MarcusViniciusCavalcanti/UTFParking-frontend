@@ -35,6 +35,10 @@ export class UserService {
   getPage(): Observable<Page<User>> {
     return this.pageSubject.asObservable();
   }
+  
+  getUserById(id): Observable<User> {
+    return this.http.get<User>(environment.serverUrl(`/users/${id}`))
+  }
 
   getProfile() {
     return this.http.get<User>(environment.serverUrl('/users/me'))
@@ -68,4 +72,5 @@ export class UserService {
         this.pageSubject.next(page);
       });
   }
+
 }

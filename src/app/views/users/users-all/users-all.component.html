@@ -85,6 +85,11 @@
               </th>
               <th scope="row">{{ user?.enabled ? 'Sim' : 'Não' }}</th>
               <th scope="row"><i class="fa fa-car"></i></th>
+              <th scope="row">
+                <a class="btn btn-sm btn-pill btn-warning">Atualizar</a>
+                <a class="btn btn-sm btn-pill btn-info" routerLink="/usuarios/detalhes/{{ user.userId }}">Detalhes</a>
+                <a class="btn btn-sm btn-pill btn-danger">Desativar</a>
+              </th>
             </tr>
             </tbody>
           </table>
